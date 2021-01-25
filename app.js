@@ -2,6 +2,9 @@ const express = require('express');
 const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const mongoose = require("mongoose");
 
@@ -9,7 +12,7 @@ const authController = require("./controllers/auth");
 const userController = require("./controllers/user");
 const messageController = require("./controllers/message");
 
-const mongoDB = "mongodb+srv://arkch99:a19c99%23%23@cluster0.dsado.mongodb.net/members-only?retryWrites=true&w=majority";
+const mongoDB = `mongodb+srv://arkch99:${process.env.MONGO_PWD}@cluster0.dsado.mongodb.net/members-only?retryWrites=true&w=majority`;
 
 mongoose.connect(mongoDB, {useUnifiedTopology: true, useNewUrlParser: true});
 
@@ -34,6 +37,15 @@ var router = express.Router();
 router.route("/")
 	.get(messageController.getAllMessages);
 
+router.route("/new-message")
+	.get(function(req, res){
+		res.render("new-message");
+	})
+	.post(messageController.newMessage);
+
+router.route("/delete-message/:message_id")
+	.get(messageController.deleteMessage);
+
 router.route("/log-in")
 	.get(function(req, res){res.render("login")})
 	.post(authController.isAuthenticated);
@@ -44,8 +56,14 @@ router.route("/log-out")
 		res.redirect("/");
 	});
 
+router.route("/passcode")
+	.get(function(req, res){
+		if(!req.user) res.redirect("/");
+		res.render("passcode");
+	})
+	.post(userController.checkPasscode);
 
-router.route("/:user_id")
+router.route("/users/:user_id")
 	.get(userController.getUserMessages);
 
 

@@ -6,6 +6,15 @@
 	<title>Document</title>
 </head>
 <body>
-	
+	<h1>New message:</h1>
+	<form action="/new-message" method="post">
+		<label for="title">Title:</label>
+		<input name="title" type="text">
+		<br>
+		<label for="text">Your message:</label>
+		<textarea name="text"></textarea>
+		<br>
+		<button type="submit">Submit</button>
+	</form>
 </body>
 </html>

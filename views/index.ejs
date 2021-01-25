@@ -12,34 +12,41 @@
 			<% if(!user) { %> 
 				<a href="/log-in">Log In</a>
 				or
-				<a href="#">Sign Up</a>
+				<a href="/sign-up">Sign Up</a>
 			<% } else {%>
 				<%= user.name %>
 				<a href="/log-out">Log Out</a>
 				<% if(user.privilege == 0) {%> 
-					<a href="#">Passcode</a>
+					<a href="/passcode">Passcode</a>
 				<% } %> 
 			<% } %> 
 		</div>
 	</div>
-	<br>
+	<br>	
 	<% if(user) { %> 
 		<span id="new-message"><a href="/new-message">New message</a></span>
 	<% } %> 
 	<div class="content">
 		<ul class="message-list">
 			<% messageList.forEach(msg => { %>
+				<% let time = msg.timestamp.toLocaleString(DateTime.DATETIME_FULL) %> 
 				<li class="message">
 					<h2 class="message-title"><%= msg.title %></h2>
 					<!--show user conditionally-->
-					<% if(user && user.privilege != 0){%> 
-						By: <a href="<%= msg.user.url %>"><%= msg.user.name %></a>
-					<% } else { %> 
-						By: anon
+					<% if(user && msg.user._id == user.id) { %> 
+						By: <a href="<%= user.url %>">You</a>,	
+					<% } else if(user && user.privilege != 0){ %> 
+						By: <a href="<%= msg.user.url %>"><%= msg.user.name %></a>,
+					<% } else { %> 						
+						By: anon,
 					<% } %>
+					at : <%= time %> 
 					<p class="message-text">
 						<%= msg.text %>
 					</p>
+					<% if(user && user.privilege == 2) { %> 
+						<a href="<%= '/delete-message/' + msg._id %>">Delete</a>
+					<% } %> 
 				</li>				
 			<% }); %>
 		</ul>
