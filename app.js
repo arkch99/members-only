@@ -4,6 +4,7 @@ const session = require("express-session");
 const passport = require("passport");
 const dotenv = require("dotenv");
 const flash = require("connect-flash");
+const compression = require("compression");
 
 dotenv.config();
 
@@ -35,6 +36,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 var router = express.Router();
+
+app.use(compression());
 
 router.route("/")
 	.get(messageController.getAllMessages);
