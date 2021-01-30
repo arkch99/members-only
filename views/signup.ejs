@@ -3,19 +3,22 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login</title>
+	<title>Sign up</title>
 </head>
 <body>
-	<h1>Log In</h1>
-	<% if(msg) { %> 		
+	<h1>Sign up</h1>
+	<% if(msg) { %> 
 		<h2><%= msg %></h2>
 	<% } %> 
-	<form action="/log-in" method="post">
+	<form action="/sign-up" method="post">
 		<label for="username">Username:</label>
 		<input name="username" type="text" placeholder="Username" required>
 		<br>
 		<label for="password">Password:</label>
-		<input name="password" type="password" placeholder="Password" required>
+		<input name="password" type="password" placeholder="Password" id="pass" required>
+		<br>
+		<label for="confirmPassword">Re-enter password</label>
+		<input name="confirmpassword" type="password" placeholder="Enter the same password" id="cnf-pass" required>
 		<br>
 		<button type="submit">Submit</button>
 	</form>

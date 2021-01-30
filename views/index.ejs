@@ -34,13 +34,15 @@
 					<h2 class="message-title"><%= msg.title %></h2>
 					<!--show user conditionally-->
 					<% if(user && msg.user._id == user.id) { %> 
-						By: <a href="<%= user.url %>">You</a>,	
+						By: <a href="<%= user.url %>">You</a>	
 					<% } else if(user && user.privilege != 0){ %> 
-						By: <a href="<%= msg.user.url %>"><%= msg.user.name %></a>,
+						By: <a href="<%= msg.user.url %>"><%= msg.user.name %></a>
 					<% } else { %> 						
-						By: anon,
+						By: anon
 					<% } %>
-					at : <%= time %> 
+					<% if(user && user.privilege >= 1) { %> 
+						, at : <%= time %> 
+					<% } %> 
 					<p class="message-text">
 						<%= msg.text %>
 					</p>

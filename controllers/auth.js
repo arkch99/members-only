@@ -1,22 +1,30 @@
 const passport = require("passport");
 var User = require("../models/user");
+const bcrypt = require("bcryptjs");
 const LocalStrategy = require("passport-local").Strategy;
 
 passport.use(
-	new LocalStrategy((username, password, done) => {
+	new LocalStrategy({passReqToCallback:true},
+		function(req, username, password, done) {
 		User.findOne({ name: username }, function(err, user){
 			if(err)
 			{
 				return done(err);
 			}
 			if(!user){
-				return done(null, false, { msg: "No user found with this name!"});
+				return done(null, false, req.flash("msg","No user found with this name!"));
 			}
-			if(user.pwd !== password){
-				return done(null, false, {msg: "Incorrect password!"});
-				
-			}
-			return done(null, user);
+			bcrypt.compare(password, user.pwd, function(err, succ)
+			{
+				if(succ)
+				{
+					return done(null, user);
+				}
+				else
+				{
+					return done(null, false, req.flash("msg", "Incorrect password!"));
+				}
+			});			
 		});
 	})
 );
@@ -33,5 +41,6 @@ passport.deserializeUser(function(id, done){
 
 exports.isAuthenticated = passport.authenticate('local', {
 	successRedirect: "/",
-	failureRedirect: "/"
+	failureRedirect: "/log-in",
+	failureFlash: true
 });

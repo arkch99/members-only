@@ -8,6 +8,9 @@
 </head>
 <body>
 	<h1><%= username %>'s messages:</h1>
+	<% if(username === currentUser.name) { %> 
+		<a href="<%= '/delete-user/' + user._id %>">Delete account</a>
+	<% } %>
 	<ul class="message-list">
 		<% messages.forEach(msg => { %>
 			<% let time = msg.timestamp.toLocaleString(DateTime.DATETIME_FULL) %> 

@@ -3,6 +3,7 @@ const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
 const dotenv = require("dotenv");
+const flash = require("connect-flash");
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use(session({ secret: "abcd", resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(flash());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -46,8 +48,19 @@ router.route("/new-message")
 router.route("/delete-message/:message_id")
 	.get(messageController.deleteMessage);
 
+router.route("/sign-up")
+	.get(function(req, res){
+		var msg = req.flash('msg')[0];
+		res.render("signup", {msg}) ;
+	})
+	.post(userController.newUser);
+
 router.route("/log-in")
-	.get(function(req, res){res.render("login")})
+	.get(function(req, res){
+		var msg = req.flash('msg')[0]
+		console.log(msg);
+		res.render("login", {msg})
+	})
 	.post(authController.isAuthenticated);
 
 router.route("/log-out")
@@ -66,7 +79,9 @@ router.route("/passcode")
 router.route("/users/:user_id")
 	.get(userController.getUserMessages);
 
-
+router.route("/delete-user/:user_id")
+	.get(userController.deleteUser);
+	
 app.use("/", router);
 app.listen(3000, () => console.log("Listening on port 3000..."));
 
