@@ -1,10 +1,11 @@
-const express = require('express');
+const express = require("express");
 const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
 const dotenv = require("dotenv");
 const flash = require("connect-flash");
 const compression = require("compression");
+const helmet = require("helmet");
 
 dotenv.config();
 
@@ -23,6 +24,8 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
 
 const app = express();
+
+app.use(helmet());
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
