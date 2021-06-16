@@ -16,6 +16,7 @@ time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
+	font-family: Helvetica, Arial, sans-serif;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -43,7 +44,7 @@ table {
 }
 
 html{
-	background: radial-gradient(circle, rgba(98,135,198,1) 30%, rgba(21,38,185,1) 100%);
+	background: white;
 }
 
 .title-bar{
@@ -55,11 +56,13 @@ html{
 	top: 0;
 	height: 10%;
 	width: 100%;
-	background: linear-gradient(0deg, rgba(7,9,41,1) 0%, rgba(9,27,143,1) 100%);
-	color: azure;
+	background: #191818;
+	color: white;
 }
 
 .title-bar h1{
+	font-size: larger;
+	font-weight: 700;
 	font-size: larger;
 }
 
@@ -70,6 +73,15 @@ html{
 .title-bar h1{
 	padding-left: 20px;
 	flex-grow: 2;
+}
+
+#login-link{
+	padding-right:10px;
+}
+
+#signup-link{
+	padding-left: 10px;
+	padding-right: 20px;
 }
 
 #logout{
@@ -104,8 +116,8 @@ body{
 	border-radius: 10px;
 	border-color: black;
 	border-width: 1px;
-	margin-bottom: 5px;
-	background: linear-gradient(0deg, rgba(191,190,190,1) 0%, rgba(107,114,137,1) 100%);
+	margin-bottom: 15px;
+	background: #c2c2cf;
 }
 
 .message-header{
@@ -152,11 +164,11 @@ body{
 	align-items: center;
 	padding-left:10px;
 	justify-content: center;	
-	background: radial-gradient(circle, rgba(143,201,56,1) 0%, rgba(50,126,64,1) 100%); 	
+	background:rgb(61, 165, 20);
 }
 
-#new-message:hover{
-	background: radial-gradient(circle, rgba(181,230,111,1) 0%, rgba(86,167,90,1) 100%);
+#new-message:hover{	
+	background: yellowgreen; 
 }
 
 #new-message a{
@@ -170,4 +182,9 @@ body{
 
 .message-title{
 	font-weight: bold;
+	padding-bottom: 5px;
+}
+
+.msg-delete-link{
+	color: red;
 }
