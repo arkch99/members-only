@@ -41,6 +41,7 @@ app.use(express.urlencoded({ extended: false }));
 var router = express.Router();
 
 app.use(compression());
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 router.route("/")
 	.get(messageController.getAllMessages);

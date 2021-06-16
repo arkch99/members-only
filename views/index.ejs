@@ -4,6 +4,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Members Only</title>
+	<link rel="stylesheet" href="/stylesheets/index.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 	<div class="title-bar">
@@ -15,7 +17,7 @@
 				<a href="/sign-up">Sign Up</a>
 			<% } else {%>
 				<%= user.name %>
-				<a href="/log-out">Log Out</a>
+				<a href="/log-out" id="logout">Log Out</a>
 				<% if(user.privilege == 0) {%> 
 					<a href="/passcode">Passcode</a>
 				<% } %> 
@@ -23,35 +25,45 @@
 		</div>
 	</div>
 	<br>	
-	<% if(user) { %> 
-		<span id="new-message"><a href="/new-message">New message</a></span>
-	<% } %> 
-	<div class="content">
-		<ul class="message-list">
-			<% messageList.forEach(msg => { %>
-				<% let time = msg.timestamp.toLocaleString(DateTime.DATETIME_FULL) %> 
-				<li class="message">
-					<h2 class="message-title"><%= msg.title %></h2>
-					<!--show user conditionally-->
-					<% if(user && msg.user._id == user.id) { %> 
-						By: <a href="<%= user.url %>">You</a>	
-					<% } else if(user && user.privilege != 0){ %> 
-						By: <a href="<%= msg.user.url %>"><%= msg.user.name %></a>
-					<% } else { %> 						
-						By: anon
-					<% } %>
-					<% if(user && user.privilege >= 1) { %> 
-						, at : <%= time %> 
-					<% } %> 
-					<p class="message-text">
-						<%= msg.text %>
-					</p>
-					<% if(user && user.privilege == 2) { %> 
-						<a href="<%= '/delete-message/' + msg._id %>">Delete</a>
-					<% } %> 
-				</li>				
-			<% }); %>
-		</ul>
+	<div class="main-content">
+		<% if(user) { %> 
+			<span id="new-message" class="fa fa-plus"><a href="/new-message">New message</a></span>
+		<% } %> 
+		<div class="content">
+			<ul class="message-list">
+				<% messageList.forEach(msg => { %>
+					<% let time = msg.timestamp.toLocaleString(DateTime.DATETIME_FULL) %> 
+					<li class="message">
+						<div class="message-title-wrapper">
+							<span class="message-header">
+								<h2 class="message-title"><%= msg.title %></h2>
+								<!--show user conditionally-->
+								<% if(user && msg.user._id == user.id) { %> 
+									By: <a href="<%= user.url %>">You</a>	
+								<% } else if(user && user.privilege != 0){ %> 
+									By: <a href="<%= msg.user.url %>"><%= msg.user.name %></a>
+								<% } else { %> 						
+									By: anon
+								<% } %>
+								<% if(user && user.privilege >= 1) { %> 
+									, at: <%= time %> 
+								<% } %> 
+							</span>
+						</div>
+						<div class="message-text-wrapper">
+							<div class="message-text">
+								<p>
+									<%= msg.text %>
+								</p>
+								<% if(user && user.privilege == 2) { %> 
+									<a class="msg-delete-link" href="<%= '/delete-message/' + msg._id %>">Delete</a>
+								<% } %> 
+							</div>
+						</div>
+					</li>				
+				<% }); %>
+			</ul>
+		</div>
 	</div>
 </body>
 </html>
