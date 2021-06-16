@@ -5,24 +5,49 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>User: <%= username %></title>
+	<link rel="stylesheet" href="/stylesheets/user.css">
 </head>
 <body>
-	<h1><%= username %>'s messages:</h1>
-	<% if(username === currentUser.name) { %> 
-		<a href="<%= '/delete-user/' + user._id %>">Delete account</a>
-	<% } %>
-	<ul class="message-list">
-		<% messages.forEach(msg => { %>
-			<% let time = msg.timestamp.toLocaleString(DateTime.DATETIME_FULL) %> 
-			<li class="message">
-				<h2 class="message-title"><%= msg.title %></h2>								
-				at : <%= time %> 
-				<p class="message-text">
-					<%= msg.text %>
-				</p>				
-			</li>				
-		<% }); %>
-	</ul>
-	<a href="/">Home</a>
+	<div class="title-bar">
+		<h1>Members Only!</h1>		
+			<div class="user-controls">			
+				<a href="<%= user.url %> "> <%= user.name %> </a>
+				<a href="/log-out" id="logout">Log Out</a>
+				<% if(user.privilege == 0) {%> 
+					<a href="/passcode">Passcode</a>
+				<% } %> 
+			</div>
+	</div>
+	<div class="main-content">		
+		<h1 class="name-display"><%= username %>'s messages:</h1>
+		<span class="user-sub-controls">
+			<% if(username === currentUser.name) { %> 
+				<a href="<%= '/delete-user/' + user._id %>">Delete account</a>
+			<% } %>
+			<a href="/">Home</a>
+		</span>
+		<div class="content">
+			<ul class="message-list">
+				<% messages.forEach(msg => { %>
+					<% let time = msg.timestamp.toLocaleString(DateTime.DATETIME_FULL) %> 
+					<li class="message">
+						<div class="message-title-wrapper">
+							<span class="message-header">
+								<h2 class="message-title"><%= msg.title %></h2>						
+								at : <%= time %> 
+							</span>
+						</div>
+						<div class="message-text-wrapper">
+							<div class="message-text">
+								<p>
+									<%= msg.text %>
+								</p>				
+							</div>
+						</div>
+					</li>				
+				<% }); %>
+			</ul>
+		</div>
+	</div>	
 </body>
 </html>

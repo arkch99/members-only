@@ -1,0 +1,181 @@
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol,fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	font-family: Helvetica, Arial, sans-serif;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+html{
+	background: white;
+}
+
+.title-bar{
+	position: fixed;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
+	top: 0;
+	height: 10%;
+	width: 100%;
+	background: #191818;
+	color: white;
+}
+
+.title-bar h1{
+	font-size: larger;
+	font-weight: 700;
+	font-size: larger;
+}
+
+.title-bar a{
+	color: azure;
+}
+
+.title-bar h1{
+	padding-left: 20px;
+	flex-grow: 2;
+}
+
+#login-link{
+	padding-right:10px;
+}
+
+#signup-link{
+	padding-left: 10px;
+	padding-right: 20px;
+}
+
+#logout{
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.user-controls{
+	width: 100%;
+	display:flex;
+	justify-content: flex-end;
+	/* justify-self: flex-start; */
+	flex-grow: 1;
+}
+
+body{
+	padding-top: 100px;
+	display:flex;
+	flex-direction: column;
+}
+
+.content ul{
+	list-style-type: none;
+}
+
+.message {
+	display:flex;
+	flex-direction: column;
+	width: 60%;	
+	padding-bottom: 30px;
+	border-style: solid;
+	border-radius: 10px;
+	border-color: black;
+	border-width: 1px;
+	margin-bottom: 15px;
+	background: #c2c2cf;
+}
+
+.message-header{
+	flex-basis: 90%;
+	margin-bottom: 20px;
+}
+
+.message-title-wrapper{
+	/* width: 100%; */	
+	display:flex;
+	padding-top: 20px;
+	justify-content: space-around;
+	border-bottom: 1px solid black ;
+}
+
+.message-text{
+	/* width: 80%; */
+	display: flex;
+	/* flex-grow: 1; */
+	flex-direction: column;
+	flex-basis:90%;
+}
+
+.message-text-wrapper{
+	display: flex;
+	flex-grow: 1;
+	justify-content: space-around;
+	padding-top: 20px;
+	/* flex-basis:90%; */
+}
+
+#new-message{
+	display:flex;
+	position: fixed;
+	bottom:0;
+	right: 0;
+	margin-bottom: 35px;
+	margin-right: 35px;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 10px;
+	height: 30px;
+	width: 150px;
+	align-items: center;
+	padding-left:10px;
+	justify-content: center;	
+	background:rgb(61, 165, 20);
+}
+.message-title{
+	font-weight: bold;
+	padding-bottom: 5px;
+}
+
+.msg-delete-link{
+	color: red;
+}
+
+.user-sub-controls{
+	width: 100%;
+	align-self: center;
+}
